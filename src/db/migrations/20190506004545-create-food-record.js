@@ -27,10 +27,20 @@ module.exports = {
         type: Sequelize.INTEGER,
         onDelete: 'CASCADE',
         references: {
-          model: 'User',
+          model: 'Users',
           key: 'id',
           as: 'userId'
         }
+      },
+      meal: {
+        type: Sequelize.STRING,
+        defaultValue: null
+        /*
+          breakfast
+          lunch
+          dinner
+          snack
+        */
       }
     });
   },

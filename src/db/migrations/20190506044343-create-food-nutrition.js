@@ -13,7 +13,7 @@ module.exports = {
         onDelete: 'CASCADE',
         allowNull: false,
         references: {
-          model: 'FoodRecord',
+          model: 'FoodRecords',
           key: 'id',
           as: 'recordId'
         }
@@ -23,7 +23,7 @@ module.exports = {
         onDelete: 'CASCADE',
         allowNull: false,
         references: {
-          model: 'Nutrient',
+          model: 'Nutrients',
           key: 'nutrient_id',
           as: 'nutrientId'
         }

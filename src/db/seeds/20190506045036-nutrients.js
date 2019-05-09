@@ -158,14 +158,11 @@ module.exports = {
       {nutrient_id: 221, name: "Alcohol, ethyl", unit: "g"},
       {nutrient_id: 262, name: "Caffeine", unit: "mg"},
       {nutrient_id: 263, name: "Theobromine", unit: "mg"},
-    ])
+    ], {});
   },
 
   down: (queryInterface, Sequelize) => {
-    /*
-      Example:
-      return queryInterface.bulkDelete('People', null, {});
-    */
+    return queryInterface.bulkDelete('Nutrients', null, {});
   }
 };
 

@@ -11,6 +11,15 @@ module.exports = (sequelize, DataTypes) => {
     userId: {
       type: DataTypes.INTEGER,
     },
+    meal: {
+      type: DataTypes.STRING,
+      /*
+        breakfast
+        lunch
+        dinner
+        snack
+      */
+    },
   }, {});
   FoodRecord.associate = function(models) {
     FoodRecord.hasMany(models.FoodNutrition, {
