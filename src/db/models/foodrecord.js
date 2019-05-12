@@ -20,6 +20,14 @@ module.exports = (sequelize, DataTypes) => {
         snack
       */
     },
+    amount: {
+      type: DataTypes.DECIMAL,
+      allowNull: false
+    },
+    unit: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
   }, {});
   FoodRecord.associate = function(models) {
     FoodRecord.hasMany(models.FoodNutrition, {

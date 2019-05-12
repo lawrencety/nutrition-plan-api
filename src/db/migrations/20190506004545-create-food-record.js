@@ -41,6 +41,14 @@ module.exports = {
           dinner
           snack
         */
+      },
+      amount: {
+        type: Sequelize.DECIMAL,
+        allowNull: false
+      },
+      unit: {
+        type: Sequelize.STRING,
+        allowNull: false
       }
     });
   },
