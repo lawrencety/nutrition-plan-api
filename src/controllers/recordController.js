@@ -9,20 +9,21 @@ module.exports = {
           statusCode: 400,
           message: 'Bad Request',
           data: err
-        }
+        };
         res.json(returnData)
       } else {
         let returnData = {
           statusCode: 200,
           message: 'Success',
           data: records
-        }
+        };
         res.json(returnData)
       }
     })
   },
 
   create(req, res, next) {
+    console.log('Called Create')
     let newRecord = {
       ndbno: req.body.ndbno,
       name: req.body.name,
@@ -37,14 +38,14 @@ module.exports = {
           statusCode: 400,
           message: 'Bad Request',
           data: err
-        }
+        };
         res.json(returnData)
       } else {
         let returnData = {
           statusCode: 200,
           message: 'Success',
           data: record
-        }
+        };
         res.json(returnData)
       }
     })
