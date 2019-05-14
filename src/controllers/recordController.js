@@ -2,9 +2,9 @@ const recordQueries = require('../db/queries.records.js');
 
 module.exports = {
   show(req, res, next) {
-    let userId = 123;
-    recordQueries.getUserRecords(userId, (err, records) => {
+    recordQueries.getUserRecords(req.params.userId, (err, records) => {
       if (err) {
+        console.log(err);
         let returnData = {
           statusCode: 400,
           message: 'Bad Request',
@@ -23,7 +23,7 @@ module.exports = {
   },
 
   create(req, res, next) {
-    console.log('Called Create')
+    console.log(res);
     let newRecord = {
       ndbno: req.body.ndbno,
       name: req.body.name,
