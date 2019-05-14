@@ -11,9 +11,9 @@ module.exports = {
     })
   },
 
-  getUserRecords(userId, callback) {
+  getUserRecords(id, callback) {
     Record.findAll({
-      where: {userId: userId}
+      where: {userId: id}
     })
     .then((records) => {
       callback(null, records);
