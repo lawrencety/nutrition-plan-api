@@ -23,7 +23,6 @@ module.exports = {
   },
 
   create(req, res, next) {
-    console.log(res);
     let newRecord = {
       ndbno: req.body.ndbno,
       name: req.body.name,
@@ -32,6 +31,9 @@ module.exports = {
       amount: req.body.amount,
       unit: req. body.unit
     };
+    console.log(req.name);
+    console.log(newRecord);
+    console.log(req);
     recordQueries.addRecord(newRecord, (err, record) => {
       if (err) {
         let returnData = {

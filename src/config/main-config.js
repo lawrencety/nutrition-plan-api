@@ -8,9 +8,9 @@ const flash = require('express-flash');
 
 module.exports = {
   init(app, express) {
-    app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({ extended: true }));
+    //app.use(bodyParser.urlencoded({ extended: true }));
     app.use(logger('dev'));
+    app.use(express.json())
     app.use(express.static(path.join(__dirname, '..', 'assets')));
     app.use(expressValidator());
     app.use(session({
