@@ -31,11 +31,53 @@ module.exports = {
       amount: req.body.amount,
       unit: req. body.unit
     };
-    console.log(req.name);
-    console.log(newRecord);
-    console.log(req);
     recordQueries.addRecord(newRecord, (err, record) => {
       if (err) {
+        console.log(err);
+        let returnData = {
+          statusCode: 400,
+          message: 'Bad Request',
+          data: err
+        };
+        res.json(returnData)
+      } else {
+        console.log(record)
+        let returnData = {
+          statusCode: 200,
+          message: 'Success',
+          data: record
+        };
+        res.json(returnData)
+      }
+    })
+  },
+
+  update(req, res, next) {
+    recordQueries.updateRecord(req, req.body, (err, record) => {
+      if (err) {
+        console.log(err);
+        let returnData = {
+          statusCode: 400,
+          message: 'Bad Request',
+          data: err
+        };
+        res.json(returnData)
+      } else {
+        console.log(record)
+        let returnData = {
+          statusCode: 200,
+          message: 'Success',
+          data: record
+        };
+        res.json(returnData)
+      }
+    })
+  },
+
+  destroy(req, res, next) {
+    recordQueries.deleteRecord(req.body.id, (err, deletedRecordsCount) => {
+      if (err) {
+        console.log(err);
         let returnData = {
           statusCode: 400,
           message: 'Bad Request',
@@ -46,7 +88,7 @@ module.exports = {
         let returnData = {
           statusCode: 200,
           message: 'Success',
-          data: record
+          data: deletedRecordsCount
         };
         res.json(returnData)
       }
