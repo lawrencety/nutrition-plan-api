@@ -1,11 +1,11 @@
 const nutritionQueries = require('../db/queries.nutrition.js');
 
 module.exports = {
-  create(req, res, next) {
+  create(body, record, callback) {
     const newNutrition = [];
     let conversion = null;
-    req.body.nutrients.forEach((nutrient) => {
-      switch(req.body.unit) {
+    body.nutrients.forEach((nutrient) => {
+      switch(body.unit) {
         case 'g':
           conversion = 0.01;
         case 'oz':
@@ -13,7 +13,7 @@ module.exports = {
       }
       newNutrition.push({
         nutrientId: nutrient.nutrient_id,
-        recordId: recordId,
+        recordId: record.id,
         amount: conversion * nutrient.value
       })
     })
@@ -25,15 +25,14 @@ module.exports = {
           message: 'Bad Request',
           data: err
         };
-        res.json(returnData)
+        callback(err)
       } else {
-        console.log(nutrients)
         let returnData = {
-          statusCode: 200
+          statusCode: 200,
           message: 'Success',
           data: nutrients
         };
-        res.json(returnData)
+        callback(null, returnData)
       }
     })
   },

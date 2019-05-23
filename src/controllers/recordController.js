@@ -1,4 +1,5 @@
 const recordQueries = require('../db/queries.records.js');
+const nutritionController = require('./nutritionController');
 
 module.exports = {
   show(req, res, next) {
@@ -39,15 +40,21 @@ module.exports = {
           message: 'Bad Request',
           data: err
         };
-        res.json(returnData)
+        return res.json(returnData)
       } else {
-        console.log(record)
-        let returnData = {
-          statusCode: 200,
-          message: 'Success',
-          data: record
-        };
-        res.json(returnData)
+        nutritionController.create(req.body, record, (err, data) => {
+          if (err) {
+            console.log(err);
+            let returnData = {
+              statusCode: 400,
+              message: 'Bad Request',
+              data: err
+            };
+            return res.json(returnData)
+          } else {
+            return res.json(data)
+          }
+        })
       }
     })
   },
@@ -63,7 +70,6 @@ module.exports = {
         };
         res.json(returnData)
       } else {
-        console.log(record)
         let returnData = {
           statusCode: 200,
           message: 'Success',
