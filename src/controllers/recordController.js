@@ -1,10 +1,11 @@
 const recordQueries = require('../db/queries.records.js');
+const nutritionController = require('./nutritionController');
 
 module.exports = {
   show(req, res, next) {
-    let userId = 123;
-    recordQueries.getUserRecords(userId, (err, records) => {
+    recordQueries.getUserRecords(req.params.userId, (err, records) => {
       if (err) {
+        console.log(err);
         let returnData = {
           statusCode: 400,
           message: 'Bad Request',
@@ -23,7 +24,6 @@ module.exports = {
   },
 
   create(req, res, next) {
-    console.log('Called Create')
     let newRecord = {
       ndbno: req.body.ndbno,
       name: req.body.name,
@@ -34,6 +34,35 @@ module.exports = {
     };
     recordQueries.addRecord(newRecord, (err, record) => {
       if (err) {
+        console.log(err);
+        let returnData = {
+          statusCode: 400,
+          message: 'Bad Request',
+          data: err
+        };
+        return res.json(returnData)
+      } else {
+        nutritionController.create(req.body, record, (err, data) => {
+          if (err) {
+            console.log(err);
+            let returnData = {
+              statusCode: 400,
+              message: 'Bad Request',
+              data: err
+            };
+            return res.json(returnData)
+          } else {
+            return res.json(data)
+          }
+        })
+      }
+    })
+  },
+
+  update(req, res, next) {
+    recordQueries.updateRecord(req, req.body, (err, record) => {
+      if (err) {
+        console.log(err);
         let returnData = {
           statusCode: 400,
           message: 'Bad Request',
@@ -45,6 +74,27 @@ module.exports = {
           statusCode: 200,
           message: 'Success',
           data: record
+        };
+        res.json(returnData)
+      }
+    })
+  },
+
+  destroy(req, res, next) {
+    recordQueries.deleteRecord(req.body.id, (err, deletedRecordsCount) => {
+      if (err) {
+        console.log(err);
+        let returnData = {
+          statusCode: 400,
+          message: 'Bad Request',
+          data: err
+        };
+        res.json(returnData)
+      } else {
+        let returnData = {
+          statusCode: 200,
+          message: 'Success',
+          data: deletedRecordsCount
         };
         res.json(returnData)
       }
