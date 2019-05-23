@@ -9,7 +9,7 @@ const flash = require('express-flash');
 
 module.exports = {
   init(app, express) {
-    //app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(bodyParser.urlencoded({ extended: true }));
     app.use(logger('dev'));
     app.use(express.json());
     app.use(cors());

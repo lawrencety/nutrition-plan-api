@@ -2,7 +2,7 @@ const Nutrition = require('./models').FoodNutrition;
 
 module.exports = {
   addNutrition(newNutrition, callback) {
-    return Nutrition.create(newNutrition)
+    return Nutrition.bulkCreate(newNutrition)
     .then((nutrition) => {
       callback(null, nutrition);
     })
@@ -10,5 +10,4 @@ module.exports = {
       callback(err);
     })
   },
-
 }

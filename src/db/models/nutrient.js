@@ -1,7 +1,11 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Nutrient = sequelize.define('Nutrient', {
-    nutrient_id: DataTypes.INTEGER,
+    nutrient_id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      allowNull: false,
+    },
     name: DataTypes.STRING,
     unit: DataTypes.STRING
   }, {
