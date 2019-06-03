@@ -24,7 +24,7 @@ module.exports = {
           let returnData = {
             statusCode: 200,
             message: 'Success',
-            data: user
+            user: user
           };
           res.json(returnData)
         })
