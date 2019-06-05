@@ -1,4 +1,5 @@
 const userQueries = require('../../src/db/queries.users.js');
+const passport = require('passport')
 
 module.exports = {
   create(req, res, next) {
@@ -19,13 +20,45 @@ module.exports = {
         };
         res.json(returnData)
       } else {
+<<<<<<< HEAD
         let returnData = {
           statusCode: 200,
           message: 'Success',
           data: user
+=======
+        passport.authenticate('local') (req, res, () => {
+          let returnData = {
+            statusCode: 200,
+            message: 'Success',
+            user: user
+          };
+          res.json(returnData)
+        })
+      }
+    })
+  },
+
+  signIn(req, res, next) {
+    passport.authenticate('local') (req, res, () => {
+      if (!req.user) {
+        let returnData = {
+          statusCode: 400,
+          message: 'Bad Request',
+        };
+        res.json(returnData)
+      } else {
+        let returnData = {
+          statusCode: 200,
+          message: 'Success',
+          user: req.user
+>>>>>>> user-sign-in
         };
         res.json(returnData)
       }
     })
+<<<<<<< HEAD
+=======
+
+>>>>>>> user-sign-in
   }
 }
