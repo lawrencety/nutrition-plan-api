@@ -20,12 +20,11 @@ module.exports = {
         };
         res.json(returnData)
       } else {
-<<<<<<< HEAD
         let returnData = {
           statusCode: 200,
           message: 'Success',
           data: user
-=======
+        }
         passport.authenticate('local') (req, res, () => {
           let returnData = {
             statusCode: 200,
@@ -51,14 +50,9 @@ module.exports = {
           statusCode: 200,
           message: 'Success',
           user: req.user
->>>>>>> user-sign-in
         };
         res.json(returnData)
       }
     })
-<<<<<<< HEAD
-=======
-
->>>>>>> user-sign-in
   }
 }
